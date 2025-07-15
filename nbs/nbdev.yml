@@ -2,8 +2,8 @@ project:
   output-dir: _docs
 
 website:
-  title: "python-starter"
-  site-url: "https://moneebullah25.github.io/python-starter"
+  title: "python_nbdev_starter"
+  site-url: "https://moneebullah25.github.io/python_nbdev_starter"
   description: "A template project to get started with production ready python projects"
   repo-branch: main
-  repo-url: "https://github.com/moneebullah25/python-starter"
+  repo-url: "https://github.com/moneebullah25/python_nbdev_starter"

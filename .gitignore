@@ -1,6 +1,7 @@
+.pypirc
 .env
 __pycache__/
-python-starter/__pycache__/
+python_nbdev_starter/__pycache__/
 *.pyc
 .ipynb_checkpoints/
 .mypy_cache/
