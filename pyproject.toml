@@ -1,6 +1,6 @@
 [project]
 name="python_nbdev_starter"
-version = "0.1.0"
+version = "0.0.3"
 description = "A template project to get started with production ready python projects"
 authors = [
     {name = "Muneeb Ullah",email = "moneebullah25@gmail.com"}
