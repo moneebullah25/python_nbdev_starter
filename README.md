@@ -12,11 +12,11 @@ Downey.
 
 Install using:
 
-    pip install nbdev-cards
+    pip install python_nbdev_starter
 
 or:
 
-    conda install -c fastai nbdev-cards
+    conda install -c fastai python_nbdev_starter
 
 ## How to use
 

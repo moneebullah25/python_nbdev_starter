@@ -27,3 +27,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 twine = "^6.1.0"
 
+[tool.poetry.scripts]
+typercli = "cli.main:app"
