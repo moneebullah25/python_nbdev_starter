@@ -1,0 +1,68 @@
+---
+description: Project-specific rules for python_nbdev_starter
+globs:
+alwaysApply: true
+---
+# Project Rules: python_nbdev_starter
+
+Notebook-first Python library template using nbdev. Write notebooks in `nbs/`, export to `python_nbdev_starter/` via `nbdev_export`.
+
+---
+
+## Package Management
+
+- Always use `uv`. Never use bare `pip`, `pip install`, or `python` directly.
+- Install: `uv sync --all-extras` | Add dep: `uv add <pkg>` | Run: `uv run <cmd>`
+
+## nbdev Workflow
+
+- Write code and tests in notebooks under `nbs/`.
+- Export to Python with: `make nbdev-export` or `uv run nbdev_export`
+- Run notebook tests with: `make nbdev-test` or `uv run nbdev_test`
+- Build docs with: `make nbdev-docs` or `uv run nbdev_docs`
+- Clean notebook outputs: `make nbdev-clean` or `uv run nbdev_clean`
+- After editing notebooks, always run `nbdev_export` before linting or testing.
+- Config lives in `settings.ini` — edit there to change project metadata.
+
+---
+
+## Make Targets
+
+| Target | What it does |
+|---|---|
+| `make` | agent-rules → install → lint → test |
+| `make install` | `uv sync --all-extras` |
+| `make lint` | codespell → ruff check --fix → ruff format → basedpyright |
+| `make test` | `uv run pytest` on exported Python |
+| `make nbdev-export` | Export notebooks to Python package |
+| `make nbdev-test` | Run tests inside notebooks |
+| `make nbdev-docs` | Build documentation site |
+| `make nbdev-clean` | Clean notebook outputs |
+| `make build` | nbdev_export + uv build |
+| `make clean` | Removes dist, caches, .venv |
+| `make agent-rules` | Regenerates `CLAUDE.md` and `AGENTS.md` from `.cursor/rules/*.mdc` |
+
+---
+
+## Linting
+
+- `make lint` runs (in order): codespell, ruff check --fix, ruff format, basedpyright — all on `python_nbdev_starter devtools`.
+- basedpyright `include` paths: `python_nbdev_starter`, `devtools`.
+- Always run `make lint` after changes and fix all errors before considering work complete.
+
+## Testing
+
+- `testpaths = ["python_nbdev_starter"]`, `pythonpath = ["."]`.
+- `python_files = ["*.py"]` — pytest collects from any `.py` file.
+- Run all: `make test` | Run one: `uv run pytest -s python_nbdev_starter/path/to/file.py`
+- For notebook tests: `make nbdev-test`
+
+---
+
+## Post-Edit Claude Hook
+
+- Fires after `Edit`, `Write`, `NotebookEdit`. Runs `.claude/validate.sh` async (300s timeout).
+- Skips for `.md`, `.json`, `.yaml`, `.yml`, `.toml`, `.txt`, `.sh`, `.env`, `.gitignore`, `.dockerignore`.
+- For `.ipynb` files: runs `nbdev_export` first, then `make lint` + `make test`.
+- For `.py` files: always runs `make lint` + `make test`.
+- Exit 2 on failure wakes Claude. Any other non-zero exit does not.

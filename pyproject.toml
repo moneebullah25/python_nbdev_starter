@@ -1,29 +1,137 @@
-[project]
-name="python_nbdev_starter"
-version = "0.1.0"
-description = "A template project to get started with production ready python projects"
-authors = [
-    {name = "Muneeb Ullah",email = "moneebullah25@gmail.com"}
-]
-license = {text = "MIT"}
-readme = "README.md"
-requires-python=">=3.9"
-dependencies = [
-    "nbdev (>=2.4.4,<3.0.0)",
-    "fastapi (>=0.116.1,<0.117.0)",
-    "uvicorn (>=0.35.0,<0.36.0)",
-    "pydantic (>=2.11.7,<3.0.0)",
-    "typer (>=0.16.0,<0.17.0)",
-    "pytest (>=8.4.1,<9.0.0)",
-    "black (>=25.1.0,<26.0.0)",
-    "ruff (>=0.12.3,<0.13.0)"
-]
-
+# ---- Build system (nbdev v3 uses setuptools) ----
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.group.dev.dependencies]
-twine = "^6.1.0"
 
+# ---- Project metadata ----
+
+[project]
+name = "python_nbdev_starter"
+dynamic = ["version"]
+description = "A template project to get started with production ready python projects"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Muneeb Ullah", email = "moneebullah25@gmail.com"}]
+keywords = ["nbdev", "jupyter", "notebook", "python"]
+classifiers = [
+    "Natural Language :: English",
+    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "fastcore>=1.5.0",
+]
+
+[project.urls]
+Repository = "https://github.com/moneebullah25/python_nbdev_starter"
+Documentation = "https://moneebullah25.github.io/python_nbdev_starter"
+
+[project.entry-points.nbdev]
+python_nbdev_starter = "python_nbdev_starter._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "python_nbdev_starter.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["python_nbdev_starter"]
+
+
+# ---- nbdev config (migrated from settings.ini) ----
+
+[tool.nbdev]
+repo = "python_nbdev_starter"
+lib_name = "python_nbdev_starter"
+version = "0.0.3"
+doc_path = "_docs"
+lib_path = "python_nbdev_starter"
+nbs_path = "nbs"
+recursive = true
+tst_flags = "notest"
+put_version_in_init = true
+branch = "main"
+doc_host = "https://moneebullah25.github.io"
+doc_baseurl = "/python_nbdev_starter"
+git_url = "https://github.com/moneebullah25/python_nbdev_starter"
+title = "python_nbdev_starter"
+audience = "Developers"
+copyright = "2025 onwards, Muneeb Ullah"
+language = "English"
+status = "3"
+user = "moneebullah25"
+readme_nb = "index.ipynb"
+black_formatting = false
+clean_ids = true
+clear_all = false
+cell_number = true
+jupyter_hooks = false
+
+
+# ---- Dev dependencies ----
+
+[dependency-groups]
+dev = [
+    "nbdev>=3.0.0",
+    "pytest>=8.3.5",
+    "pytest-sugar>=1.0.0",
+    "ruff>=0.11.0",
+    "codespell>=2.4.1",
+    "rich>=14.0.0",
+    "basedpyright>=1.29.1",
+    "funlog>=0.2.1",
+    "pre-commit>=4.2.0",
+]
+
+
+# ---- Ruff ----
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "B", "I"]
+ignore = ["E501", "E402", "E731", "W191", "COM812", "ISC002"]
+
+[tool.ruff.lint.per-file-ignores]
+# nbdev-generated files use fastcore star imports and @patch patterns
+"python_nbdev_starter/*.py" = ["F403", "F405", "E701", "E302", "E303"]
+
+
+# ---- Basedpyright ----
+
+[tool.basedpyright]
+include = ["python_nbdev_starter", "devtools"]
+reportMissingTypeStubs = false
+reportAny = false
+reportExplicitAny = false
+reportUnusedCallResult = false
+reportImplicitStringConcatenation = false
+# nbdev-generated code uses fastcore wildcard imports and @patch patterns
+reportWildcardImportFromLibrary = false
+reportUnannotatedClassAttribute = false
+reportImplicitOverride = false
+reportUnknownParameterType = false
+reportMissingParameterType = false
+reportUndefinedVariable = false
+reportUntypedFunctionDecorator = false
+
+
+# ---- Codespell ----
+
+[tool.codespell]
+
+
+# ---- Pytest ----
+
+[tool.pytest.ini_options]
+python_files = ["*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+testpaths = ["python_nbdev_starter"]
+pythonpath = ["."]
+norecursedirs = []
+filterwarnings = []

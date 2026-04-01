@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv sync:*)",
+      "Bash(uv run:*)",
+      "Bash(make:*)",
+      "Bash(nbdev_export:*)",
+      "Bash(nbdev_test:*)",
+      "Bash(nbdev_clean:*)",
+      "Bash(nbdev_docs:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/mrmacbook/Desktop/muneeb/python_nbdev_starter/.claude/validate.sh",
+            "timeout": 300,
+            "statusMessage": "Validating (lint + test)...",
+            "asyncRewake": true
+          }
+        ]
+      }
+    ]
+  }
+}
