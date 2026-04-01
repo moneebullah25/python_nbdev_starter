@@ -98,7 +98,7 @@ ignore = ["E501", "E402", "E731", "W191", "COM812", "ISC002"]
 
 [tool.ruff.lint.per-file-ignores]
 # nbdev-generated files use fastcore star imports and @patch patterns
-"python_nbdev_starter/*.py" = ["F403", "F405", "E701", "E302", "E303"]
+"python_nbdev_starter/*.py" = ["F403", "F405", "E701", "E302", "E303", "I001"]
 
 
 # ---- Basedpyright ----

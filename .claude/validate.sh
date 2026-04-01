@@ -41,12 +41,24 @@ run() {
     fi
 }
 
-# For notebook changes, export first
+# For notebook changes: clean (strip outputs) then export (sync Python files).
+# Mirrors exactly what CI does: nbdev-clean must be a no-op on committed notebooks,
+# and nbdev-export must produce no diff vs committed Python files.
 if echo "$CHANGED_FILE" | grep -qE "\.ipynb$"; then
-    echo "--- nbdev_export ---"
-    if ! uv run nbdev-export; then
-        echo "FAILED: nbdev_export"
+    echo "--- uv run nbdev-clean ---"
+    if ! uv run nbdev-clean; then
+        echo "FAILED: nbdev-clean"
         FAILED=1
+    fi
+    echo "--- uv run nbdev-export ---"
+    if ! uv run nbdev-export; then
+        echo "FAILED: nbdev-export"
+        FAILED=1
+    fi
+    # Warn if notebooks still differ after clean (outputs were not stripped before save)
+    DIRTY_NBS=$(git diff --name-only -- "*.ipynb" 2>/dev/null || true)
+    if [ -n "$DIRTY_NBS" ]; then
+        echo "WARNING: notebooks have uncommitted changes after nbdev-clean — commit them before pushing or CI will fail"
     fi
 fi
 

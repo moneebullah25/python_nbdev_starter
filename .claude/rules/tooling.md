@@ -75,7 +75,7 @@ alwaysApply: true
 - The hook runs `.claude/validate.sh` with a 300-second timeout and `asyncRewake: true`.
 - Conditional logic in `validate.sh`:
   - **Skips entirely** for non-source files (`.md`, `.json`, `.yaml`, `.yml`, `.toml`, `.txt`, `.sh`, `.env`, `.gitignore`, `.dockerignore`).
-  - **For `.ipynb` files**: runs `nbdev_export` first, then `make lint` and `make test`.
+  - **For `.ipynb` files**: runs `nbdev-clean` (strip outputs), then `nbdev-export` (sync Python), warns if notebooks still have uncommitted changes, then `make lint` and `make nbdev-test`. This mirrors exactly what CI checks.
   - **For `.py` files**: always runs `make lint` and `make test`.
 - Exit code 2 on failure wakes the model to address the issue.
 
