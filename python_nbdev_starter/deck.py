@@ -5,12 +5,12 @@
 # %% auto #0
 __all__ = ['Deck', 'draw_n']
 
-# %% ../nbs/01_deck.ipynb #b51f5fbf
+# %% ../nbs/01_deck.ipynb #c82c3961
 from .card import *
 from fastcore.utils import *
 import random
 
-# %% ../nbs/01_deck.ipynb #802c4496
+# %% ../nbs/01_deck.ipynb #9f01cdee
 class Deck:
     "A deck of 52 cards, not including jokers"
     def __init__(self): self.cards = [Card(s, r) for s in range(4) for r in range(1, 14)]
@@ -23,21 +23,21 @@ class Deck:
         "Shuffles the cards in this deck"
         random.shuffle(self.cards)
 
-# %% ../nbs/01_deck.ipynb #16a52ff8
+# %% ../nbs/01_deck.ipynb #8f2f72e1
 @patch
 def pop(self:Deck,
         idx:int=-1):  # The index of the card to remove, defaulting to the last one
     "Remove one card from the deck"
     return self.cards.pop(idx)
 
-# %% ../nbs/01_deck.ipynb #97ba58dd
+# %% ../nbs/01_deck.ipynb #b155c9a2
 @patch
 def remove(self:Deck,
            card:Card): # Card to remove
     "Removes `card` from the deck or raises exception if it is not there"
     self.cards.remove(card)
 
-# %% ../nbs/01_deck.ipynb #ddc0c07d
+# %% ../nbs/01_deck.ipynb #c06f233e
 def draw_n(n:int, # number of cards to draw
            replace:bool=True): # whether or not draw with replacement
     "Draw `n` cards, with replacement iif `replace`"

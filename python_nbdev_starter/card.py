@@ -5,14 +5,14 @@
 # %% auto #0
 __all__ = ['suits', 'ranks', 'Card']
 
-# %% ../nbs/00_card.ipynb #de60a35f
+# %% ../nbs/00_card.ipynb #a04efe04
 from fastcore.utils import *
 
-# %% ../nbs/00_card.ipynb #37bf807e
+# %% ../nbs/00_card.ipynb #24bd4f9b
 suits = ["♣️","♦️","❤️","♠️"]
 ranks = [None, "A"] + [str(x) for x in range(2,11)]  + ["J", "Q", "K"]
 
-# %% ../nbs/00_card.ipynb #eaa124d7
+# %% ../nbs/00_card.ipynb #5bc9ec46
 class Card:
     "A playing card"
     def __init__(self,
@@ -22,7 +22,7 @@ class Card:
     def __str__(self): return f"{ranks[self.rank]}{suits[self.suit]}"
     __repr__ = __str__
 
-# %% ../nbs/00_card.ipynb #68aaf12f
+# %% ../nbs/00_card.ipynb #92f3ee33
 @patch
 def __eq__(self:Card, a:Card): return (self.suit,self.rank)==(a.suit,a.rank)
 @patch
