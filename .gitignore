@@ -160,3 +160,5 @@ checklink/cookies.txt
 
 # Quarto
 .quarto
+.understand-anything/
+.DS_Store
