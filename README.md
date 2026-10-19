@@ -8,15 +8,16 @@ from [Think Python 2nd
 Edition](https://greenteapress.com/wp/think-python-2e/) by Allen B.
 Downey.
 
+![Real output of the Card and Deck API](docs/images/demo.png)
+
+*Output of running the `Card`/`Deck` API via a short Python script (code shown in the image).*
+
 ## Install
 
-Install using:
+Not published to PyPI. Install from source:
 
-    pip install nbdev-cards
-
-or:
-
-    conda install -c fastai nbdev-cards
+    git clone https://github.com/moneebullah25/python_nbdev_starter
+    cd python_nbdev_starter && pip install -e .
 
 ## How to use
 
